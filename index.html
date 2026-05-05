@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Solar Itacaré — pousada de charme em casarão histórico no centro de Itacaré, Bahia. 6 suítes, decoração baiana e a poucos minutos das praias." />
+<meta name="theme-color" content="#1F4E5A" />
+<title>Solar Itacaré — Pousada no Centro Histórico</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* =========================================================
+     Solar Itacaré — Design tokens
+     Paleta: areia (base), mar (azul das janelas — marca visual),
+             sage (verde das cabeceiras), coral (pôr do sol)
+     ========================================================= */
+  :root {
+    --sand-50:  #FBF7F0;
+    --sand-100: #F5EFE6;
+    --sand-200: #E8DCC4;
+    --sand-300: #C9B89A;
+    --ink-900:  #1A1814;
+    --ink-700:  #3D3A33;
+    --ink-500:  #6B6760;
+    --sea-900:  #1F4E5A;
+    --sea-700:  #2C5F6F;
+    --sea-500:  #4A8FA8;
+    --sage-500: #7A8B6A;
+    --coral:    #C4654E;
+    --gold:     #B8935A;
+
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --max-w: 1200px;
+    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    font-weight: 300;
+    color: var(--ink-700);
+    background: var(--sand-50);
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    color: var(--ink-900);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  h2 em, h1 em { font-style: italic; color: var(--sea-700); font-weight: 400; }
+
+  .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* =========================================================
+     NAV
+     ========================================================= */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem var(--gutter);
+    background: rgba(251, 247, 240, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 184, 154, 0.3);
+  }
+  .nav-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--ink-900);
+    letter-spacing: 0.02em;
+  }
+  .nav-brand span { color: var(--sea-700); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; font-size: 0.92rem; }
+  .nav-links a {
+    color: var(--ink-700);
+    transition: color 0.2s;
+    font-weight: 400;
+  }
+  .nav-links a:hover { color: var(--sea-700); }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    color: var(--sand-50);
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('images/farol-vista-01.jpg') center/cover no-repeat;
+    background-color: var(--sea-900);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(26, 24, 20, 0.35) 0%,
+      rgba(26, 24, 20, 0.25) 40%,
+      rgba(31, 78, 90, 0.55) 100%
+    );
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 6rem var(--gutter) 4rem;
+    max-width: var(--max-w);
+    width: 100%;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--sand-200);
+    font-weight: 400;
+  }
+  .hero-eyebrow::before {
+    content: '— ';
+    color: var(--gold);
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    color: var(--sand-50);
+    margin: 0 0 1.5rem;
+    max-width: 14ch;
+  }
+  .hero h1 em { color: var(--sand-200); }
+  .hero p {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    max-width: 38ch;
+    color: var(--sand-100);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.95rem 1.75rem;
+    font-family: var(--sans);
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: 1px solid currentColor;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: transparent;
+    color: var(--sand-50);
+  }
+  .btn:hover { background: var(--sand-50); color: var(--ink-900); }
+  .btn--solid {
+    background: var(--sand-50);
+    color: var(--ink-900);
+    border-color: var(--sand-50);
+  }
+  .btn--solid:hover { background: transparent; color: var(--sand-50); border-color: var(--sand-50); }
+  .btn--ink { color: var(--ink-900); border-color: var(--ink-900); }
+  .btn--ink:hover { background: var(--ink-900); color: var(--sand-50); }
+  .btn--whatsapp { background: #25D366; border-color: #25D366; color: white; }
+  .btn--whatsapp:hover { background: #1FB855; border-color: #1FB855; color: white; }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sand-200);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .scroll-cue::after {
+    content: '';
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, var(--sand-200), transparent);
+    animation: scroll-pulse 2.5s infinite;
+  }
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* =========================================================
+     SECTION wrapper
+     ========================================================= */
+  section { padding: clamp(4rem, 10vh, 7rem) 0; }
+  .section-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    margin: 0 0 2rem;
+    max-width: 18ch;
+  }
+
+  /* =========================================================
+     SOBRE
+     ========================================================= */
+  .sobre { background: var(--sand-100); }
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  @media (max-width: 860px) { .sobre-grid { grid-template-columns: 1fr; } }
+  .sobre-text p {
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+  }
+  .sobre-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--sand-300);
+  }
+  .stat { line-height: 1.3; }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    margin-bottom: 0.4rem;
+  }
+  .stat-value {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--ink-900);
+    font-weight: 500;
+  }
+  .sobre-image-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+  .sobre-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .sobre-image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border: 1px solid var(--sand-300);
+    pointer-events: none;
+    transform: translate(12px, 12px);
+  }
+
+  /* =========================================================
+     SUÍTES
+     ========================================================= */
+  .suites { background: var(--sand-50); }
+  .suites-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+  .suites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 2rem;
+  }
+  .suite-card {
+    background: white;
+    overflow: hidden;
+    transition: transform 0.4s, box-shadow 0.4s;
+    border: 1px solid var(--sand-200);
+  }
+  .suite-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px rgba(31, 78, 90, 0.25);
+  }
+  .suite-image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--sand-200);
+  }
+  .suite-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+  }
+  .suite-card:hover .suite-image img { transform: scale(1.04); }
+  .suite-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(31, 78, 90, 0.92);
+    color: var(--sand-50);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    backdrop-filter: blur(6px);
+  }
+  .suite-tag--mar { background: rgba(196, 101, 78, 0.95); }
+  .suite-body { padding: 1.5rem 1.5rem 1.75rem; }
+  .suite-body h3 {
+    font-size: 1.7rem;
+    margin: 0 0 0.4rem;
+  }
+  .suite-meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    margin-bottom: 0.85rem;
+  }
+  .suite-desc {
+    font-size: 0.95rem;
+    color: var(--ink-700);
+    margin: 0 0 1.25rem;
+  }
+  .suite-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .suite-features span {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.65rem;
+    background: var(--sand-100);
+    color: var(--ink-700);
+    border: 1px solid var(--sand-200);
+  }
+  /* Placeholder "fotos em breve" */
+  .suite-image--placeholder {
+    background: linear-gradient(135deg, var(--sea-700) 0%, var(--sea-900) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sand-100);
+    text-align: center;
+    padding: 2rem;
+  }
+  .placeholder-content {
+    font-family: var(--serif);
+    font-style: italic;
+    line-height: 1.4;
+  }
+  .placeholder-content small {
+    display: block;
+    font-family: var(--sans);
+    font-style: normal;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    color: var(--sand-200);
+  }
+
+  /* =========================================================
+     DIFERENCIAIS
+     ========================================================= */
+  .diferenciais {
+    background: var(--ink-900);
+    color: var(--sand-100);
+  }
+  .diferenciais .section-title { color: var(--sand-50); }
+  .diferenciais .section-eyebrow { color: var(--gold); }
+  .diferenciais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 1px;
+    background: rgba(184, 147, 90, 0.2);
+    margin-top: 3rem;
+  }
+  .diferencial {
+    background: var(--ink-900);
+    padding: 2.5rem 1.75rem;
+  }
+  .diferencial-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1.25rem;
+    color: var(--gold);
+    font-family: var(--serif);
+    font-style: italic;
+  }
+  .diferencial h4 {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--sand-50);
+    margin: 0 0 0.75rem;
+    font-weight: 500;
+  }
+  .diferencial p {
+    font-size: 0.95rem;
+    color: var(--sand-200);
+    margin: 0;
+  }
+
+  /* =========================================================
+     LOCALIZAÇÃO
+     ========================================================= */
+  .localizacao { background: var(--sand-100); }
+  .localizacao-grid {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  @media (max-width: 860px) { .localizacao-grid { grid-template-columns: 1fr; } }
+  .map-frame {
+    width: 100%;
+    height: 460px;
+    border: 1px solid var(--sand-300);
+    filter: grayscale(0.15);
+  }
+  .endereco {
+    background: white;
+    padding: 2rem;
+    border-left: 3px solid var(--coral);
+    margin-top: 2rem;
+  }
+  .endereco-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    margin-bottom: 0.5rem;
+  }
+  .endereco-value {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--ink-900);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
+  .endereco-tel {
+    display: inline-block;
+    color: var(--sea-700);
+    font-weight: 500;
+    border-bottom: 1px solid var(--sea-700);
+    padding-bottom: 1px;
+  }
+
+  /* =========================================================
+     CONTATO
+     ========================================================= */
+  .contato {
+    background: var(--sea-900);
+    color: var(--sand-100);
+    text-align: center;
+  }
+  .contato .section-eyebrow { color: var(--gold); }
+  .contato .section-title {
+    color: var(--sand-50);
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contato-text {
+    max-width: 50ch;
+    margin: 0 auto 2.5rem;
+    color: var(--sand-200);
+    font-size: 1.05rem;
+  }
+  .contato-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .contato-note {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--sand-300);
+    font-style: italic;
+  }
+
+  /* =========================================================
+     FOOTER
+     ========================================================= */
+  footer {
+    background: var(--ink-900);
+    color: var(--sand-300);
+    padding: 3rem 0 2rem;
+    font-size: 0.9rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 720px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--sand-100);
+    margin-bottom: 0.5rem;
+  }
+  .footer-brand span { color: var(--sea-500); font-style: italic; }
+  .footer h5 {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 1rem;
+    font-weight: 500;
+  }
+  .footer ul { list-style: none; padding: 0; margin: 0; }
+  .footer ul li { margin-bottom: 0.4rem; }
+  .footer ul a { color: var(--sand-200); transition: color 0.2s; }
+  .footer ul a:hover { color: var(--sand-50); }
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201, 184, 154, 0.15);
+    font-size: 0.78rem;
+    color: var(--ink-500);
+    text-align: center;
+  }
+
+  /* =========================================================
+     UTIL
+     ========================================================= */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Solar <span>Itacaré</span></a>
+    <div class="nav-links">
+      <a href="#sobre">A Pousada</a>
+      <a href="#suites">Suítes</a>
+      <a href="#localizacao">Localização</a>
+      <a href="#contato">Reservar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-bg" role="img" aria-label="Vista do mar a partir da Suíte Farol"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Itacaré · Bahia · Brasil</div>
+    <h1>Acordar com o <em>mar na janela</em>.</h1>
+    <p>Casarão histórico no centro de Itacaré com 6 suítes e décadas de hospitalidade baiana.</p>
+    <div class="hero-actions">
+      <a href="#suites" class="btn btn--solid">Ver Suítes</a>
+      <a href="https://wa.me/5573981063656?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20disponibilidade%20na%20Solar%20Itacar%C3%A9." class="btn">WhatsApp</a>
+    </div>
+  </div>
+  <div class="scroll-cue">role</div>
+</header>
+
+<!-- ============ SOBRE ============ -->
+<section class="sobre" id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div class="sobre-text reveal">
+        <div class="section-eyebrow">A Pousada</div>
+        <h2 class="section-title">Charme e <em>aconchego</em> em casarão histórico</h2>
+        <p>O Solar Itacaré ocupa um casarão tradicional no Centro Histórico, com janelões azuis abertos para a rua de paralelepípedos e suítes que preservam o piso de madeira escura, as cabeceiras esculpidas e o teto em ripas de madeira.</p>
+        <p>São 6 acomodações cuidadas, com camas confortáveis, ar-condicionado, Wi-Fi e chuveiro quente. Sem firulas — só o essencial bem feito, com a energia que só o centro de Itacaré tem.</p>
+        <div class="sobre-stats">
+          <div class="stat">
+            <div class="stat-label">Localização</div>
+            <div class="stat-value">Centro Histórico</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Suítes</div>
+            <div class="stat-value">6 acomodações</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Suítes vista mar</div>
+            <div class="stat-value">2 (Farol e Jeribucaçu)</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Capacidade</div>
+            <div class="stat-value">Até 16 hóspedes</div>
+          </div>
+        </div>
+      </div>
+      <div class="sobre-image-wrap reveal">
+        <img src="images/varanda-01.jpg" alt="Varanda com rede e vista para o mar" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUÍTES ============ -->
+<section class="suites" id="suites">
+  <div class="container">
+    <div class="suites-header reveal">
+      <div>
+        <div class="section-eyebrow">Acomodações</div>
+        <h2 class="section-title">Cada suíte tem <em>seu próprio gosto</em></h2>
+      </div>
+      <a href="#contato" class="btn btn--ink">Consultar Disponibilidade</a>
+    </div>
+
+    <div class="suites-grid">
+
+      <!-- FAROL -->
+      <article class="suite-card reveal">
+        <div class="suite-image">
+          <span class="suite-tag suite-tag--mar">Vista Mar</span>
+          <img src="images/farol-01.jpg" alt="Suíte Farol — vista interna" loading="lazy" />
+        </div>
+        <div class="suite-body">
+          <h3>Farol</h3>
+          <div class="suite-meta">2 hóspedes · 1° andar · vista mar</div>
+          <p class="suite-desc">A suíte da janela azul aberta para os barcos. Pé-direito alto em madeira, cabeceira verde e cama queen.</p>
+          <div class="suite-features">
+            <span>Vista mar</span><span>Queen</span><span>Ar-cond.</span><span>Wi-Fi</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- JERIBUCAÇU — placeholder -->
+      <article class="suite-card reveal">
+        <div class="suite-image suite-image--placeholder">
+          <span class="suite-tag suite-tag--mar">Vista Mar</span>
+          <div class="placeholder-content">
+            "Em breve você verá<br>esta suíte por aqui."
+            <small>Fotos chegando</small>
+          </div>
+        </div>
+        <div class="suite-body">
+          <h3>Jeribucaçu</h3>
+          <div class="suite-meta">Até 4 hóspedes · 1° andar · vista mar</div>
+          <p class="suite-desc">A maior do casarão. Cama queen no quarto principal e cama no sótão de madeira — ideal para famílias.</p>
+          <div class="suite-features">
+            <span>Vista mar</span><span>4 pessoas</span><span>Sótão</span><span>Ar-cond.</span><span>Wi-Fi</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRAINHA -->
+      <article class="suite-card reveal">
+        <div class="suite-image">
+          <span class="suite-tag">1° Andar</span>
+          <img src="images/prainha-01.jpg" alt="Suíte Prainha — vista interna" loading="lazy" />
+        </div>
+        <div class="suite-body">
+          <h3>Prainha</h3>
+          <div class="suite-meta">Até 3 hóspedes · 1° andar</div>
+          <p class="suite-desc">Suíte tripla com piso de madeira, janelas azuis e a cabeceira verde característica da pousada.</p>
+          <div class="suite-features">
+            <span>3 pessoas</span><span>Piso madeira</span><span>Ar-cond.</span><span>Wi-Fi</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- RIBEIRA -->
+      <article class="suite-card reveal">
+        <div class="suite-image">
+          <span class="suite-tag">1° Andar</span>
+          <img src="images/ribeira-01.jpg" alt="Suíte Ribeira — vista interna" loading="lazy" />
+        </div>
+        <div class="suite-body">
+          <h3>Ribeira</h3>
+          <div class="suite-meta">Até 3 hóspedes · 1° andar</div>
+          <p class="suite-desc">Acomoda casal e mais um, com a mesma elegância sóbria das suítes superiores. Piso de madeira nobre.</p>
+          <div class="suite-features">
+            <span>3 pessoas</span><span>Piso madeira</span><span>Ar-cond.</span><span>Wi-Fi</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- TIRIRICA — placeholder -->
+      <article class="suite-card reveal">
+        <div class="suite-image suite-image--placeholder">
+          <span class="suite-tag">Térreo</span>
+          <div class="placeholder-content">
+            "Em breve você verá<br>esta suíte por aqui."
+            <small>Fotos chegando</small>
+          </div>
+        </div>
+        <div class="suite-body">
+          <h3>Tiririca</h3>
+          <div class="suite-meta">2 hóspedes · térreo</div>
+          <p class="suite-desc">No térreo, com cimento queimado claro no piso — atmosfera mais fresca e contemporânea.</p>
+          <div class="suite-features">
+            <span>Casal</span><span>Térreo</span><span>Ar-cond.</span><span>Wi-Fi</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PITUBA -->
+      <article class="suite-card reveal">
+        <div class="suite-image">
+          <span class="suite-tag">Térreo</span>
+          <img src="images/pituba-01.jpg" alt="Suíte Pituba — vista interna" loading="lazy" />
+        </div>
+        <div class="suite-body">
+          <h3>Pituba</h3>
+          <div class="suite-meta">2 hóspedes · térreo</div>
+          <p class="suite-desc">Térreo aconchegante com piso de cimento queimado e detalhes em madeira. Frescor ao alcance.</p>
+          <div class="suite-features">
+            <span>Casal</span><span>Térreo</span><span>Ar-cond.</span><span>Wi-Fi</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIFERENCIAIS ============ -->
+<section class="diferenciais">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Por que a Solar?</div>
+      <h2 class="section-title">O que nos faz <em>especiais</em></h2>
+    </div>
+
+    <div class="diferenciais-grid">
+      <div class="diferencial reveal">
+        <div class="diferencial-icon">i.</div>
+        <h4>Casarão histórico</h4>
+        <p>Arquitetura preservada, janelões azuis e madeira aparente. O charme do centro de Itacaré em cada detalhe.</p>
+      </div>
+      <div class="diferencial reveal">
+        <div class="diferencial-icon">ii.</div>
+        <h4>Centro a pé</h4>
+        <p>Restaurantes, bares, lojas e a Praça da Matriz a poucos passos. Sem precisar de carro pra viver Itacaré.</p>
+      </div>
+      <div class="diferencial reveal">
+        <div class="diferencial-icon">iii.</div>
+        <h4>Praias próximas</h4>
+        <p>Concha, Tiririca, Pituba e Ribeira ao alcance — algumas a pé, outras a poucos minutos.</p>
+      </div>
+      <div class="diferencial reveal">
+        <div class="diferencial-icon">iv.</div>
+        <h4>Atendimento direto</h4>
+        <p>Operação familiar. Você fala direto com quem cuida da casa, sem central de atendimento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCALIZAÇÃO ============ -->
+<section class="localizacao" id="localizacao">
+  <div class="container">
+    <div class="localizacao-grid">
+      <div class="reveal">
+        <div class="section-eyebrow">Localização</div>
+        <h2 class="section-title">No <em>centro</em> de tudo</h2>
+        <p>O Solar fica na Rua João Coutinho, no Centro Histórico de Itacaré — a posição ideal para explorar as praias do norte (Concha e Resende), a gastronomia da Pituba e a noite da Passarela.</p>
+        <div class="endereco">
+          <div class="endereco-label">Endereço</div>
+          <div class="endereco-value">R. João Coutinho, 185<br>Centro · Itacaré · BA<br>CEP 45530-000</div>
+          <a href="tel:+5573981063656" class="endereco-tel">(73) 98106-3656</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <iframe
+          class="map-frame"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.5!2d-38.9938784!3d-14.2785524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDE2JzQyLjgiUyAzOMKwNTknMzguMCJX!5e0!3m2!1spt-BR!2sbr!4v1680000000000!5m2!1spt-BR!2sbr"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa Solar Itacaré"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTATO ============ -->
+<section class="contato" id="contato">
+  <div class="container reveal">
+    <div class="section-eyebrow">Reservas e Contato</div>
+    <h2 class="section-title">Pronto para <em>viver</em> Itacaré?</h2>
+    <p class="contato-text">Consulte disponibilidade, tire dúvidas ou faça sua reserva direto conosco. A Sol, nossa atendente no WhatsApp, responde em minutos.</p>
+    <div class="contato-actions">
+      <a href="https://wa.me/5573981063656?text=Ol%C3%A1!%20Gostaria%20de%20saber%20sobre%20disponibilidade%20na%20Solar%20Itacar%C3%A9." class="btn btn--whatsapp">Chamar no WhatsApp</a>
+    </div>
+    <div class="contato-note">Reserva online direta em breve.</div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Solar <span>Itacaré</span></div>
+        <p>R. João Coutinho, 185<br>Centro · Itacaré · BA</p>
+      </div>
+      <div>
+        <h5>Navegação</h5>
+        <ul>
+          <li><a href="#sobre">A Pousada</a></li>
+          <li><a href="#suites">Suítes</a></li>
+          <li><a href="#localizacao">Localização</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contato</h5>
+        <ul>
+          <li><a href="https://wa.me/5573981063656">WhatsApp</a></li>
+          <li><a href="tel:+5573981063656">(73) 98106-3656</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Solar Itacaré. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
